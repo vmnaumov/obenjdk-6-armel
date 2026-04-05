@@ -1,0 +1,35 @@
+name: Assemble jre
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  assemble-jre:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Downloading jre
+        run: |
+          wget -nv https://github.com/vmnaumov/openjdk-6-armel/releases/download/jre1.0.0/jre.zip
+          unzip jre.zip
+
+      - name: Create package
+        run: |    
+          mv jre openjdk-6-jre
+
+      - name: Compress
+        run: |    
+          zip -r openjdk-6-jre.zip openjdk-6-jre
+
+      - name: Create package release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            openjdk-6-jre.zip
