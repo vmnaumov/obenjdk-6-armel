@@ -1,4 +1,4 @@
-name: Debug armhf assemble jre
+name: Debug assemble jre
 
 on: workflow_dispatch
 
@@ -100,11 +100,5 @@ jobs:
 
       - name: Compress
         run: |          
-          zip -r jre-6-${{ matrix.ARCH }}.zip jre
-          du -h jre-6-${{ matrix.ARCH }}.zip
-
-#      - name: Create jre ${{ env.ARCH}} release
-#        uses: softprops/action-gh-release@v2
-#        with:
-#          files: |
-#            jre-6-${{ env.ARCH}}.zip
+          zip -r jre-6-${{ env.ARCH }}.zip jre
+          du -h jre-6-${{ env.ARCH }}.zip
